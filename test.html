@@ -1,0 +1,176 @@
+Here’s an **expanded explanation of each React hook** you listed, including **use cases, timing, performance considerations**, and **sample code**. This version is designed to deepen your understanding while still being concise and practical.
+
+---
+
+## 🔧 1. `useActionState` (⚠️ Experimental – React 19+)
+
+* **Purpose**: Manages asynchronous form submissions in React 19's upcoming `action` APIs (used with `useFormStatus`).
+* **Use case**: Server-side actions in React Server Components (RSC).
+* **Timing**: Async updates triggered by user form submission.
+
+```tsx
+const [state, submitAction] = useActionState(
+  async (prevState, formData) => {
+    const response = await submitForm(formData);
+    return response;
+  },
+  null // initial state
+);
+```
+
+---
+
+## ♻️ 2. `useCallback`
+
+* **Purpose**: Returns a memoized version of a callback function.
+* **Use case**: Prevents re-rendering of child components receiving a callback via props.
+* **Timing**: Re-created only when dependencies change.
+
+```tsx
+const memoizedFn = useCallback(() => {
+  console.log("Stable reference unless deps change");
+}, []);
+```
+
+🔹 Great when passing callbacks to `React.memo()` or custom hooks.
+
+---
+
+## 🌐 3. `useContext`
+
+* **Purpose**: Access the current value of a React context.
+* **Use case**: Share global state (like themes, auth, or language) across the app.
+* **Timing**: Rerenders when context value changes.
+
+```tsx
+const ThemeContext = createContext("light");
+const theme = useContext(ThemeContext);
+```
+
+🔹 Cleaner than wrapping components in `<Context.Consumer>`.
+
+---
+
+## 🧩 4. `useDebugValue`
+
+* **Purpose**: Displays a label for custom hooks in React DevTools.
+* **Use case**: Debugging only — especially useful for reusable custom hooks.
+
+```tsx
+useDebugValue(user, user => user?.name || "Unknown");
+```
+
+🔹 Used **inside custom hooks** only. Does not affect runtime logic.
+
+---
+
+## 🕓 5. `useDeferredValue`
+
+* **Purpose**: Defers value updates until browser is idle.
+* **Use case**: Improves responsiveness for fast-typing UIs, filters, etc.
+
+```tsx
+const deferredInput = useDeferredValue(input);
+```
+
+🔹 Keeps UI snappy by delaying non-urgent renders (like search results).
+
+---
+
+## 📦 6. `useEffect`
+
+* **Purpose**: Perform side effects after rendering (like data fetching, subscriptions).
+* **Use case**: Replace lifecycle methods (`componentDidMount`, `componentDidUpdate`, etc.).
+* **Timing**: After render and paint.
+
+```tsx
+useEffect(() => {
+  fetchData();
+  return () => console.log("Cleanup"); // on unmount
+}, [dependency]);
+```
+
+🔹 Avoid doing layout or measurement here — use `useLayoutEffect` for that.
+
+---
+
+## 🆔 7. `useId`
+
+* **Purpose**: Generates unique IDs that are stable across server and client.
+* **Use case**: For accessibility (`aria-*`), form field linkage.
+* **Timing**: During render — safe for SSR.
+
+```tsx
+const id = useId();
+<label htmlFor={id}>Name</label>
+<input id={id} />
+```
+
+🔹 Replaces manually generating UUIDs or index-based IDs.
+
+---
+
+## 🛠️ 8. `useImperativeHandle`
+
+* **Purpose**: Customize the value exposed to parent components via `ref`.
+* **Use case**: Provide limited control (like focus or scrollTo) to parent.
+
+```tsx
+useImperativeHandle(ref, () => ({
+  focus: () => inputRef.current.focus(),
+}));
+```
+
+🔹 Wrap component in `forwardRef()` to use this hook.
+
+---
+
+## 🧵 9. `useInsertionEffect`
+
+* **Purpose**: Runs **before layout and paint**, mainly for CSS-in-JS libraries.
+* **Use case**: Style injection to avoid FOUC (flash of unstyled content).
+
+```tsx
+useInsertionEffect(() => {
+  // insert style tags or DOM mutations before layout
+}, []);
+```
+
+🔹 Synchronous and rare — mainly for library authors.
+
+---
+
+## 🧮 10. `useLayoutEffect`
+
+* **Purpose**: Like `useEffect`, but fires **before paint**, synchronously.
+* **Use case**: Reading layout values (e.g., DOM measurements) or forcing DOM changes.
+
+```tsx
+useLayoutEffect(() => {
+  const height = divRef.current.clientHeight;
+  console.log("Measured height:", height);
+}, []);
+```
+
+🔹 Avoid blocking renders — prefer `useEffect` unless DOM reads/writes are needed immediately.
+
+---
+
+## Summary Table
+
+| Hook                  | Purpose                  | Timing            | Use Case Example                  |
+| --------------------- | ------------------------ | ----------------- | --------------------------------- |
+| `useActionState`      | Async form state         | On form action    | Server-side form handling         |
+| `useCallback`         | Memoize function         | On deps change    | Prevent re-renders of children    |
+| `useContext`          | Consume context          | On context change | Theme, auth                       |
+| `useDebugValue`       | Debug custom hooks       | DevTools only     | Custom hook monitoring            |
+| `useDeferredValue`    | Defer value rendering    | Idle time         | Search filters                    |
+| `useEffect`           | Side effects             | After paint       | Fetching, subscriptions           |
+| `useId`               | Stable ID                | During render     | Label/input for accessibility     |
+| `useImperativeHandle` | Custom `ref` exposure    | ForwardRef        | Focus, scroll, imperative actions |
+| `useInsertionEffect`  | Sync style injection     | Before layout     | CSS-in-JS libraries               |
+| `useLayoutEffect`     | Synchronous side effects | Before paint      | DOM measurements                  |
+
+---
+
+Would you like this in **Markdown, PDF, or a printable cheatsheet format**?

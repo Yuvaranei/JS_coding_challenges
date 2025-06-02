@@ -125,10 +125,10 @@ promise.then((data) => {
     console.log(data);
     return MyPromise.resolve('Hey');
 })
+.finally(console.log)
 .then((data) => {
     console.log("Data 2", data);
     return MyPromise.reject("Something wrong");
 })
 .then(console.log)
 .catch(console.log)
-.finally(console.log)

@@ -1,0 +1,16 @@
+.star-container {
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+}
+
+.star {
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+}
+
+.selected {
+    background-color: orange;
+}
