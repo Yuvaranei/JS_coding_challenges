@@ -1,0 +1,4 @@
+const scheduleJSON = [
+    { time: '',
+plan: ''}
+]

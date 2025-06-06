@@ -1,0 +1,9 @@
+td {
+    width: 40px;
+    height: 40px;
+    border: 1px solid;
+}
+
+.highlightCell {
+    background-color: violet;
+}

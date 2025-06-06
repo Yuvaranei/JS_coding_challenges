@@ -1,0 +1,49 @@
+/* Write CSS code here */
+:root {
+    --card_width: 250px;
+    --row_increment: 10px;
+    --card_border_radius: 16px;
+    --card_small: 26;
+    --card_medium: 33;
+    --card_large: 45;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+    background-color: grey;
+}
+
+.pin_container {
+    display: grid;
+    position: absolute;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    gap: 20px;
+    /* counter-increment: var(--row_increment); */
+
+
+    grid-template-columns: repeat(2, var(--card_width));
+    grid-template-rows: 1fr 1fr;
+}
+
+.card {
+    background-color: yellow;
+    width: var(--card_width);
+    border-radius: var(--card_border_radius);
+}
+
+
+.card_small {
+    grid-row-end: span var(--card_small);
+}
+
+.card_medium {
+    grid-row-end: span var(--card_medium);
+}
+
+.card_large {
+    grid-row-end: span var(--card_large);
+}

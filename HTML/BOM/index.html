@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Users:</div>
+    <ul>
+      <li>John</li>
+      <li>Pete</li>
+    </ul>
+    <script>
+        const divElement = document.body.children[0];
+        console.log(divElement.textContent)
+
+        const ulElement =divElement.nextElementSibling;
+        console.log("ulElement...", ulElement);
+
+        console.log(ulElement.children[0].nextElementSibling.textContent)
+    </script>
+  </body>
+</html>

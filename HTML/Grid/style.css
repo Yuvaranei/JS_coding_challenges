@@ -1,0 +1,34 @@
+.grid-container {
+    display: grid;
+    grid-template-rows: 50px 50px 50px;
+    grid-template-columns: 100px 100px;
+    grid-template-areas: 
+    "header header"
+    "nav content"
+    "footer footer"
+    ;
+}
+
+.header {
+    grid-area: header;
+}
+
+.nav {
+    grid-area: nav;
+}
+
+.content {
+    grid-area: content;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+/* .header {
+    grid-column: 1 / 3;
+}
+
+.footer {
+    grid-column: 1 / 3 ;
+} */
